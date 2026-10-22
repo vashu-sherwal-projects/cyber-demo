@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CyberDesk | Defensive Security</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div class="shell">
+    <aside class="sidebar">
+      <div class="brand"><div class="brand-icon">C</div><div><strong>CyberDesk</strong><small>DEFENSIVE SECURITY</small></div></div>
+      <div class="nav-label">WORKSPACE</div>
+      <button class="nav active" data-view="overview"><span>◈</span> Overview</button>
+      <button class="nav" data-view="integrity"><span>⌁</span> File integrity</button>
+      <button class="nav" data-view="password"><span>⛨</span> Password audit</button>
+      <button class="nav" data-view="logs"><span>≋</span> Log analyzer</button>
+      <div class="sidebar-bottom"><span class="status-dot"></span> Local-only mode <small>No cloud uploads</small></div>
+    </aside>
+
+    <main class="main">
+      <header class="topbar"><div><span class="eyebrow">PARROT OS TOOLKIT</span><h1 id="page-title">Security overview</h1></div><a class="btn btn-quiet" href="/api/report">↓ Export report</a></header>
+      <div class="notice"><span>ⓘ</span><div><strong>Defensive use only</strong><p>Tools run on your own machine. No port scanning, exploitation, or remote attack features.</p></div></div>
+
+      <section class="view show" id="view-overview">
+        <div class="stats">
+          <article class="stat-card"><div class="stat-head">WORK MODE <span class="chip green">SAFE</span></div><strong>Local</strong><p>Analysis stays on this device.</p></article>
+          <article class="stat-card"><div class="stat-head">PYTHON VERSION <span class="mini-icon">⌘</span></div><strong id="python-version">Loading…</strong><p>Backend runtime</p></article>
+          <article class="stat-card"><div class="stat-head">HOSTNAME <span class="mini-icon">▣</span></div><strong class="smaller" id="hostname">Loading…</strong><p id="local-ip">Local IP: —</p></article>
+        </div>
+        <div class="section-heading"><div><h2>Quick tools</h2><p>Pick a module to begin a local security check.</p></div></div>
+        <div class="tool-grid">
+          <button class="tool-card" data-view="integrity"><span class="tool-icon blue">⌁</span><strong>File integrity</strong><p>Calculate SHA-256 for a file and use it to verify file identity.</p><span class="tool-link">Open tool ↗</span></button>
+          <button class="tool-card" data-view="password"><span class="tool-icon purple">⛨</span><strong>Password audit</strong><p>Check length and character variety locally. Password is not stored.</p><span class="tool-link">Open tool ↗</span></button>
+          <button class="tool-card" data-view="logs"><span class="tool-icon amber">≋</span><strong>Log analyzer</strong><p>Flag common security-related phrases in text logs.</p><span class="tool-link">Open tool ↗</span></button>
+        </div>
+        <div class="panel system-panel"><div class="panel-title"><div><h2>System snapshot</h2><p>Basic information about this local session</p></div><span class="live"><i></i> LIVE</span></div><div class="system-grid"><div><small>PLATFORM</small><strong id="platform">Loading…</strong></div><div><small>LOCAL TIME</small><strong id="local-time">Loading…</strong></div></div></div>
+      </section>
+
+      <section class="view" id="view-integrity">
+        <div class="panel module-panel"><div class="panel-title"><div><span class="eyebrow">MODULE 01</span><h2>File integrity checker</h2><p>Compute a SHA-256 fingerprint without saving the uploaded file.</p></div><span class="tool-icon blue">⌁</span></div>
+          <form id="hash-form"><label class="drop-zone" for="file-input"><span class="upload-icon">↑</span><strong>Choose a file to hash</strong><small>Maximum file size: 8 MB. Processing stays local.</small><input type="file" id="file-input" required></label><button class="btn btn-primary" type="submit">Calculate SHA-256</button></form>
+          <div id="hash-result" class="result hidden"></div>
+        </div>
+      </section>
+
+      <section class="view" id="view-password">
+        <div class="panel module-panel"><div class="panel-title"><div><span class="eyebrow">MODULE 02</span><h2>Password strength audit</h2><p>Evaluates length and character variety. Avoid entering a password you currently use.</p></div><span class="tool-icon purple">⛨</span></div>
+          <form id="password-form"><label class="field-label" for="password-input">Sample password</label><div class="password-wrap"><input id="password-input" type="password" autocomplete="off" placeholder="Try a sample password…" required><button type="button" id="toggle-password" class="reveal">Show</button></div><p class="helper">For privacy, use a made-up sample. The app does not save or log it.</p><button class="btn btn-primary" type="submit">Audit password</button></form>
+          <div id="password-result" class="result hidden"></div>
+        </div>
+      </section>
+
+      <section class="view" id="view-logs">
+        <div class="panel module-panel"><div class="panel-title"><div><span class="eyebrow">MODULE 03</span><h2>Log analyzer</h2><p>Search pasted text for common security phrases. Review findings manually.</p></div><span class="tool-icon amber">≋</span></div>
+          <form id="logs-form"><label class="field-label" for="log-input">Log text</label><textarea id="log-input" rows="10" placeholder="Paste authorized system/application log text here…" required></textarea><div class="form-row"><span class="helper">Text limit: 1 MB. Results are not saved.</span><button class="btn btn-primary" type="submit">Analyze logs</button></div></form>
+          <div id="logs-result" class="result hidden"></div>
+        </div>
+      </section>
+      <footer>CyberDesk v1.0 <span>Built for learning • Python + Flask + HTML + CSS</span></footer>
+    </main>
+  </div>
+  <script src="{{ url_for('static', filename='app.js') }}"></script>
+</body>
+</html>
